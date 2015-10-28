@@ -13,6 +13,9 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityListe
 
     private static final Logger log = LoggerManager.getLogger(HomeActivity.class);
 
+    public static final int FRAGMENT_ID_LOGIN = 1;
+
+
     private AppBarLayout mToolbar;
 
     @Override
@@ -22,19 +25,30 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityListe
 
         mToolbar = (AppBarLayout) findViewById(R.id.toolbar);
 
-        onLoadFragment(new LoginFragment(), false);
+        onLoadFragment(FRAGMENT_ID_LOGIN, false);
     }
 
 
     @Override
-    public void onLoadFragment(Fragment fragment, boolean hasToolbar) {
+    public void onLoadFragment(int fragmentId, boolean hasToolbar) {
 
         if (findViewById(R.id.fragment_panel) != null) {
 
             mToolbar.setVisibility(hasToolbar ? View.VISIBLE : View.INVISIBLE);
 
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_panel, fragment).commit();
+            Fragment frag = null;
+            switch (fragmentId){
+
+                default:
+                case FRAGMENT_ID_LOGIN:
+                    frag = new LoginFragment();
+                    break;
+
+            }
+            if(frag != null) {
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.fragment_panel, frag).commit();
+            }
         }
     }
 }

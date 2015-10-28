@@ -7,6 +7,6 @@ import android.support.v4.app.Fragment;
  */
 public interface HomeActivityListener {
 
-    void onLoadFragment(Fragment fragment, boolean hasToolbar);
+    void onLoadFragment(int fragmentId, boolean hasToolbar);
 
 }

@@ -9,10 +9,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
+import com.noveogroup.android.log.Logger;
+import com.noveogroup.android.log.LoggerManager;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.util.List;
+
 /**
  * Created by bobtimm on 10/28/2015.
  */
 public class LoginFragment extends Fragment implements View.OnClickListener{
+
+    private static final Logger log = LoggerManager.getLogger(LoginFragment.class);
 
     private Button mLogin;
     private EditText mUsername;
@@ -44,6 +55,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             mUsername.setVisibility(View.GONE);
             mPassword.setVisibility(View.GONE);
             mLoader.setVisibility(View.VISIBLE);
+
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("User");
+            query.whereEqualTo("username", mUsername.getText().toString().toLowerCase());
+            query.findInBackground(new FindCallback<ParseObject>() {
+                @Override
+                public void done(List<ParseObject> objects, ParseException e) {
+
+                }
+            });
+
         }
     }
 }

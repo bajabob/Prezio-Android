@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Prezio</string>
     <string name="action_settings">Settings</string>
+
+    <string name="login_username">Username</string>
+    <string name="login_password">Password</string>
+    <string name="login_signin">SIGN IN</string>
 </resources>

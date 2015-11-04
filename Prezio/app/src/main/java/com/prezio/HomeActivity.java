@@ -14,8 +14,10 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityListe
     private static final Logger log = LoggerManager.getLogger(HomeActivity.class);
 
     public static final int FRAGMENT_ID_LOGIN = 1;
+    public static final int FRAGMENT_ID_HOME = 2;
+    public static final int FRAGMENT_ID_CREATE_CHECK_IN = 3;
 
-
+    private UserModel mCurrentUser;
     private AppBarLayout mToolbar;
 
     @Override
@@ -36,7 +38,7 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityListe
 
             mToolbar.setVisibility(hasToolbar ? View.VISIBLE : View.INVISIBLE);
 
-            Fragment frag = null;
+            PrezioFragment frag = null;
             switch (fragmentId){
 
                 default:
@@ -44,11 +46,27 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityListe
                     frag = new LoginFragment();
                     break;
 
+                case FRAGMENT_ID_HOME:
+                    frag = new HomeFragment();
+                    break;
+
+                case FRAGMENT_ID_CREATE_CHECK_IN:
+                    frag = new CreateCheckInFragment();
+                    break;
+
             }
             if(frag != null) {
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.fragment_panel, frag).commit();
+                getSupportFragmentManager().beginTransaction().
+                        replace(R.id.fragment_panel, frag).commit();
+                frag.setHomeActivityListener(this);
+                frag.setCurrentUser(mCurrentUser);
             }
         }
+    }
+
+    @Override
+    public void setCurrentUser(UserModel user){
+        log.d("User set: "+user.getUsername());
+        mCurrentUser = user;
     }
 }

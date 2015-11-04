@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="32dp">
+
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_alignParentLeft="true"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginLeft="18dp"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/colorHighlight"/>
+
+            <LinearLayout
+                android:layout_toRightOf="@id/profile_image"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="12dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="Bob Timm"/>
+
+                <TextView
+                    android:id="@+id/checkin_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Check-ins: 49"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Member Since 2015"/>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        card_view:cardCornerRadius="4dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:textSize="18sp"
+                        android:text="@string/home_discovered_check_ins"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:textSize="11sp"
+                        android:text="@string/home_check_ins_near_you"/>
+                </LinearLayout>
+
+
+                <ProgressBar
+                    android:id="@+id/loader"
+                    android:layout_alignParentRight="true"
+                    android:indeterminate="true"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorHighlightDark"/>
+
+            <TextView
+                android:id="@+id/searching"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:textStyle="italic"
+                android:textColor="@color/colorAccent"
+                android:text="searching..."/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <Button
+        android:id="@+id/create"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_bg_highlight"
+        android:text="@string/home_new_check_in"
+        android:textColor="@color/white"
+        android:textSize="18sp"/>
+
+</LinearLayout>

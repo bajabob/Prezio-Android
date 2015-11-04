@@ -8,5 +8,5 @@ import android.support.v4.app.Fragment;
 public interface HomeActivityListener {
 
     void onLoadFragment(int fragmentId, boolean hasToolbar);
-
+    void setCurrentUser(UserModel user);
 }

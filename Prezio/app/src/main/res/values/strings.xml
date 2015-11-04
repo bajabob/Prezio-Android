@@ -5,4 +5,8 @@
     <string name="login_username">Username</string>
     <string name="login_password">Password</string>
     <string name="login_signin">SIGN IN</string>
+
+    <string name="home_new_check_in">CREATE CHECK IN</string>
+    <string name="home_check_ins_near_you">Happening Around You Now</string>
+    <string name="home_discovered_check_ins">Discovered Check-ins</string>
 </resources>

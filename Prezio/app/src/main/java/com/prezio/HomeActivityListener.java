@@ -9,4 +9,5 @@ public interface HomeActivityListener {
 
     void onLoadFragment(int fragmentId, boolean hasToolbar);
     void setCurrentUser(UserModel user);
+    void setCurrentCheckin(CheckinModel checkin);
 }

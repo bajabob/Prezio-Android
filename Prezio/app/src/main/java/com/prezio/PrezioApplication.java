@@ -7,6 +7,8 @@ import com.noveogroup.android.log.LoggerManager;
 import com.parse.Parse;
 import com.prezio.templates.Config;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
 /**
  * Created by bob on 10/5/15.
  */
@@ -17,6 +19,8 @@ public class PrezioApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        JodaTimeAndroid.init(this);
 
         log.d("[onCreate]");
 

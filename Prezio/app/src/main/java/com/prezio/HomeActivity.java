@@ -20,6 +20,7 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityListe
     public static final int FRAGMENT_ID_CREATE_CHECK_IN = 3;
 
     private UserModel mCurrentUser;
+    private CheckinModel mCurrentCheckin;
     private AppBarLayout mToolbar;
 
     @Override
@@ -32,6 +33,11 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityListe
         onLoadFragment(FRAGMENT_ID_LOGIN, false);
     }
 
+
+    @Override
+    public void setCurrentCheckin(CheckinModel checkin) {
+        mCurrentCheckin = checkin;
+    }
 
     @Override
     public void onLoadFragment(int fragmentId, boolean hasToolbar) {
@@ -62,6 +68,7 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityListe
                         replace(R.id.fragment_panel, frag).commit();
                 frag.setHomeActivityListener(this);
                 frag.setCurrentUser(mCurrentUser);
+                frag.setCurrentCheckin(mCurrentCheckin);
             }
         }
     }

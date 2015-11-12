@@ -10,6 +10,7 @@ import java.lang.ref.WeakReference;
 public class PrezioFragment extends Fragment {
 
     protected UserModel mCurrentUser;
+    protected CheckinModel mCurrentCheckin;
     protected WeakReference<HomeActivityListener> mListener;
 
     public void setHomeActivityListener(HomeActivityListener listener){
@@ -19,5 +20,7 @@ public class PrezioFragment extends Fragment {
     public void setCurrentUser(UserModel user){
         mCurrentUser = user;
     }
-
+    public void setCurrentCheckin(CheckinModel checkin){
+        mCurrentCheckin = checkin;
+    }
 }

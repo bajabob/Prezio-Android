@@ -1,5 +1,6 @@
 package com.prezio;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.view.View;
 
 import com.noveogroup.android.log.Logger;
 import com.noveogroup.android.log.LoggerManager;
+import com.prezio.templates.Preferences;
 
 public class HomeActivity extends AppCompatActivity implements HomeActivityListener {
 
@@ -68,5 +70,11 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityListe
     public void setCurrentUser(UserModel user){
         log.d("User set: "+user.getUsername());
         mCurrentUser = user;
+
+        // save user to local system so it loads next time the app is opened
+        SharedPreferences settings = getSharedPreferences(Preferences.PREFERENCE_FILE, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("username", user.getUsername());
+        editor.commit();
     }
 }

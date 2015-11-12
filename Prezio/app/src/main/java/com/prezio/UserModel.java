@@ -1,11 +1,15 @@
 package com.prezio;
 
+import com.noveogroup.android.log.Logger;
+import com.noveogroup.android.log.LoggerManager;
 import com.parse.ParseObject;
 
 /**
  * Created by bobtimm on 11/4/2015.
  */
 public class UserModel {
+
+    private static final Logger log = LoggerManager.getLogger(UserModel.class);
 
     private static final String PO_USERNAME = "username";
     private static final String PO_NAME = "Name";
@@ -27,6 +31,10 @@ public class UserModel {
 
     public ParseObject getParseObject(){
         return mParseObject;
+    }
+
+    public ParseObject getParseObjectPointer(){
+        return ParseObject.createWithoutData("User", mParseObject.getObjectId());
     }
 
     public String getProfilePictureUrl(){

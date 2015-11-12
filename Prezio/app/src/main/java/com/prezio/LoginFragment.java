@@ -1,5 +1,6 @@
 package com.prezio;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.prezio.templates.Preferences;
 import com.squareup.picasso.Picasso;
 
 import java.lang.ref.WeakReference;
@@ -58,44 +60,57 @@ public class LoginFragment extends PrezioFragment implements View.OnClickListene
 
         mLogo = (TextView) v.findViewById(R.id.logo);
 
+        SharedPreferences settings = getActivity().getSharedPreferences(Preferences.PREFERENCE_FILE, 0);
+        String username = settings.getString("username", null);
+
+        if(username != null){
+            login(username);
+        }
+
         return v;
+    }
+
+
+    private void login(String username){
+
+        mLogin.setVisibility(View.GONE);
+        mUsername.setVisibility(View.GONE);
+        mPassword.setVisibility(View.GONE);
+        mLoader.setVisibility(View.VISIBLE);
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("User");
+        query.whereEqualTo("username", username.toLowerCase());
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                if(objects != null && objects.size() > 0){
+                    UserModel user = new UserModel(objects.get(0));
+                    Picasso.with(getActivity()).load(user.getProfilePictureUrl()).into(mProfileImage);
+                    mProfileImage.setVisibility(View.VISIBLE);
+                    if(mListener != null) {
+                        mListener.get().setCurrentUser(user);
+                    }
+
+                    Handler handler = new Handler();
+                    final Runnable r = new Runnable() {
+                        public void run() {
+                            if(mListener != null){
+                                mListener.get().onLoadFragment(HomeActivity.FRAGMENT_ID_HOME, true);
+                            }
+                        }
+                    };
+                    handler.postDelayed(r, 2000);
+
+                }
+            }
+        });
     }
 
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.login){
 
-            mLogin.setVisibility(View.GONE);
-            mUsername.setVisibility(View.GONE);
-            mPassword.setVisibility(View.GONE);
-            mLoader.setVisibility(View.VISIBLE);
-
-            ParseQuery<ParseObject> query = ParseQuery.getQuery("User");
-            query.whereEqualTo("username", mUsername.getText().toString().toLowerCase());
-            query.findInBackground(new FindCallback<ParseObject>() {
-                @Override
-                public void done(List<ParseObject> objects, ParseException e) {
-                    if(objects != null && objects.size() > 0){
-                        UserModel user = new UserModel(objects.get(0));
-                        Picasso.with(getActivity()).load(user.getProfilePictureUrl()).into(mProfileImage);
-                        mProfileImage.setVisibility(View.VISIBLE);
-                        if(mListener != null) {
-                            mListener.get().setCurrentUser(user);
-                        }
-
-                        Handler handler = new Handler();
-                        final Runnable r = new Runnable() {
-                            public void run() {
-                                if(mListener != null){
-                                    mListener.get().onLoadFragment(HomeActivity.FRAGMENT_ID_HOME, true);
-                                }
-                            }
-                        };
-                        handler.postDelayed(r, 2000);
-
-                    }
-                }
-            });
+            login(mUsername.getText().toString());
 
         }
     }

@@ -6,6 +6,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.noveogroup.android.log.Logger;
 import com.noveogroup.android.log.LoggerManager;
@@ -18,6 +19,7 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityListe
     public static final int FRAGMENT_ID_LOGIN = 1;
     public static final int FRAGMENT_ID_HOME = 2;
     public static final int FRAGMENT_ID_CREATE_CHECK_IN = 3;
+    public static final int FRAGMENT_ID_BROADCAST = 4;
 
     private UserModel mCurrentUser;
     private CheckinModel mCurrentCheckin;
@@ -27,6 +29,7 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         mToolbar = (AppBarLayout) findViewById(R.id.toolbar);
 
@@ -44,7 +47,7 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityListe
 
         if (findViewById(R.id.fragment_panel) != null) {
 
-            mToolbar.setVisibility(hasToolbar ? View.VISIBLE : View.INVISIBLE);
+            mToolbar.setVisibility(hasToolbar ? View.VISIBLE : View.GONE);
 
             PrezioFragment frag = null;
             switch (fragmentId){
@@ -60,6 +63,10 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityListe
 
                 case FRAGMENT_ID_CREATE_CHECK_IN:
                     frag = new CreateCheckInFragment();
+                    break;
+
+                case FRAGMENT_ID_BROADCAST:
+                    frag = new BroadcastFragment();
                     break;
 
             }

@@ -35,6 +35,10 @@ public class CheckinModel {
         return mParseObject.getLong(PO_CHECKIN_EXPIRES_UTC);
     }
 
+    public UserModel getCreator(){
+        return new UserModel(mParseObject.getParseObject(PO_CREATOR));
+    }
+
     public ParseObject getParseObject(){
         return mParseObject;
     }

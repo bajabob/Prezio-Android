@@ -62,8 +62,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Name Your Check-in"
-                    android:inputType="text"
-                    android:imeOptions="actionNext"/>
+                    android:inputType="text|textCapWords"
+                    android:imeOptions="actionDone"/>
 
                 <NumberPicker
                     android:id="@+id/headcount_picker"

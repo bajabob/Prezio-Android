@@ -76,6 +76,7 @@ public class LoginFragment extends PrezioFragment implements View.OnClickListene
         mLogin.setVisibility(View.GONE);
         mUsername.setVisibility(View.GONE);
         mPassword.setVisibility(View.GONE);
+        mProfileImage.setVisibility(View.VISIBLE);
         mLoader.setVisibility(View.VISIBLE);
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("User");
@@ -86,7 +87,7 @@ public class LoginFragment extends PrezioFragment implements View.OnClickListene
                 if(objects != null && objects.size() > 0){
                     UserModel user = new UserModel(objects.get(0));
                     Picasso.with(getActivity()).load(user.getProfilePictureUrl()).into(mProfileImage);
-                    mProfileImage.setVisibility(View.VISIBLE);
+
                     if(mListener != null) {
                         mListener.get().setCurrentUser(user);
                     }

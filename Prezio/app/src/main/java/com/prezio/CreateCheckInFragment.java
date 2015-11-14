@@ -18,7 +18,6 @@ import org.joda.time.DateTimeZone;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
-import java.util.TimeZone;
 
 
 /**
@@ -85,21 +84,22 @@ public class CreateCheckInFragment extends PrezioFragment implements NumberPicke
             SecureRandom random = new SecureRandom();
 
             String key = new BigInteger(130, random).toString(8);
-            key = key.substring(0, 6);
+            key = key.substring(0, 4);
 
             DateTime now = DateTime.now(DateTimeZone.forID("UTC"));
-            now.plusMinutes(mTimeExpiresMinutes);
+            DateTime then = now.plusMinutes(mTimeExpiresMinutes);
 
             ParseObject po = new ParseObject("CheckinPlaces");
-            po.put("bluetoothId", "PREZIO_"+key);
+            po.put("bluetoothId", "PRZ_"+key);
             po.put("expected", mHeadCount);
             po.put("creator", mCurrentUser.getParseObjectPointer());
             po.put("name", mCheckinName.getText().toString());
-            po.put("checkinExpiresUtc", now.getMillis());
+            po.put("checkinExpiresUtc", then.getMillis());
             po.saveInBackground();
 
             if(mListener != null) {
-                mListener.get().onLoadFragment(HomeActivity.FRAGMENT_ID_HOME, true);
+                mListener.get().setCurrentCheckin(new CheckinModel(po));
+                mListener.get().onLoadFragment(HomeActivity.FRAGMENT_ID_BROADCAST, true);
             }
         }
     }

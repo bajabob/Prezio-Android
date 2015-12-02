@@ -1,5 +1,6 @@
 package com.prezio;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;

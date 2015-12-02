@@ -74,6 +74,10 @@ public class BroadcastFragment extends PrezioFragment implements View.OnClickLis
     public void onStart(){
         super.onStart();
 
+        this.runBT(mCurrentCheckin.getBluetoothId());
+    }
+
+    private void runBT(String name){
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         final BluetoothLeAdvertiser advertiser = mBluetoothAdapter.getBluetoothLeAdvertiser();
 
@@ -88,7 +92,7 @@ public class BroadcastFragment extends PrezioFragment implements View.OnClickLis
         ParcelUuid uuid = new ParcelUuid(UUID.fromString("0000110B-0000-1000-8000-00805F9B34FB"));
         dataBuilder.addServiceUuid(uuid);
 
-        mBluetoothAdapter.setName(mCurrentCheckin.getBluetoothId()); //8 characters works, 9+ fails
+        mBluetoothAdapter.setName(name); //8 characters works, 9+ fails
         dataBuilder.setIncludeDeviceName(true);
 
         mAdvertiseCallback = new AdvertiseCallback() {
@@ -112,7 +116,6 @@ public class BroadcastFragment extends PrezioFragment implements View.OnClickLis
 
         mHandler = new Handler(Looper.getMainLooper());
         mStatusChecker.run();
-
     }
 
     Runnable mStatusChecker = new Runnable() {
@@ -150,6 +153,7 @@ public class BroadcastFragment extends PrezioFragment implements View.OnClickLis
     public void onClick(View v) {
         if(v.getId() == R.id.cancel){
             if(mListener != null){
+                runBT("noname");
                 mListener.get().onLoadFragment(HomeActivity.FRAGMENT_ID_HOME, true);
             }
         }

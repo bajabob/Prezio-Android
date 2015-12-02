@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -33,7 +34,7 @@ public class LoginFragment extends PrezioFragment implements View.OnClickListene
 
     private static final Logger log = LoggerManager.getLogger(LoginFragment.class);
 
-    private TextView mLogo;
+    private ImageView mLogo;
     private Button mLogin;
     private EditText mUsername;
     private EditText mPassword;
@@ -58,7 +59,7 @@ public class LoginFragment extends PrezioFragment implements View.OnClickListene
         mProfileImage = (CircleImageView) v.findViewById(R.id.profile_image);
         mProfileImage.setVisibility(View.GONE);
 
-        mLogo = (TextView) v.findViewById(R.id.logo);
+        mLogo = (ImageView) v.findViewById(R.id.logo);
 
         SharedPreferences settings = getActivity().getSharedPreferences(Preferences.PREFERENCE_FILE, 0);
         String username = settings.getString("username", null);

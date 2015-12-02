@@ -7,15 +7,15 @@
     android:layout_height="match_parent"
     android:padding="64dp">
 
-    <TextView
-        android:text="Prezio Logo"
+    <ImageView
         android:id="@+id/logo"
         android:layout_marginTop="70dp"
         android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginBottom="70dp"
-        android:textSize="20sp"/>
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:src="@drawable/prez_b"/>
+
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_gravity="center_horizontal"
